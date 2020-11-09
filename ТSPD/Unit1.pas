@@ -34,12 +34,14 @@ type
 var
   Form1: TForm1;
   names:string;
-  bal,n:integer;
+  bal,n,it:integer;
   f:text;
   masvopros:array [1..40] of string;
   mastypes: array [1..40] of integer;
   masotvet: array [1..40,1..6] of string;
   masprotvet : array [1..40,1..6] of integer;
+  randzad : array [1..40] of Integer;
+  randotvet : array [1..7] of Integer;
 implementation
 
 uses Unit2;
@@ -77,7 +79,8 @@ for i:=1 to 4 do
   masotvet[nomer][i]:=s;
   end;
 readln (f,i);
-masprotvet[nomer][1]:=i-1;
+masprotvet[nomer][1]:=1;
+masprotvet[nomer][2]:=i-1;
 end;
 
 procedure readingt2 (nomer:integer);
@@ -91,14 +94,86 @@ for i:=1 to 5 do
   masotvet[nomer][i]:=anticezar(s);
   end;
 readln (f,s);
+masprotvet[nomer][1]:=(Length(s) div 2)+1;
 for i:=1 to length(s) do
 if (s[i] <> ' ') then
-masprotvet[nomer][(i div 2) + 1]:=ord(s[i])-49;
+masprotvet[nomer][(i div 2) + 2]:=ord(s[i])-49;
 end;
-
-procedure TForm1.Button1Click(Sender: TObject);
-var k,t:integer;str:widestring;
+procedure random_shufle (var mas:array of Integer;len :integer);
+var i,a,b,c:Integer;
 begin
+  Randomize;
+  for i:=1 to len do
+  begin
+  a:=Random(len);
+  b:=Random(len);
+  c:=mas[a];
+  mas[a]:=mas[b];
+  mas[b]:=c;
+  end;
+
+end;
+procedure fill_rand_zad ();
+var i:Integer;
+begin
+  Randomize;
+  for i:=1 to n do
+      randzad[i]:=i;
+
+  random_shufle(randzad,n);
+end;
+procedure show_task();
+var i:integer;
+begin
+  if (mastypes[randzad[it]]<3) then
+  begin
+  for i:=1 to 4 do
+  randotvet[i]:=i;
+  random_shufle(randotvet,4);
+  Form1.RadioButton1.Caption:=masotvet[randzad[it]][randotvet[1]];
+  Form1.RadioButton2.Caption:=masotvet[randzad[it]][randotvet[2]];
+  Form1.RadioButton3.Caption:=masotvet[randzad[it]][randotvet[3]];
+  Form1.RadioButton4.Caption:=masotvet[randzad[it]][randotvet[4]];
+  Form1.Label2.caption:=masvopros[randzad[it]];
+  if (mastypes[randzad[it]]=2) then
+    Form1.Image1.Picture.LoadFromFile('image'+IntToStr(randzad[it])+'.bmp');
+
+  Form1.RadioButton1.show;
+  Form1.RadioButton2.show;
+  Form1.RadioButton3.show;
+  Form1.RadioButton4.show;
+  Form1.Label2.show;
+  Form1.Image1.show;
+  end;
+
+   if (mastypes[randzad[it]]>2) then
+  begin
+  for i:=1 to 5 do
+  randotvet[i]:=i;
+  random_shufle(randotvet,5);
+  Form1.CheckBox1.Caption:=masotvet[randzad[it]][randotvet[1]];
+  Form1.CheckBox2.Caption:=masotvet[randzad[it]][randotvet[2]];
+  Form1.CheckBox3.Caption:=masotvet[randzad[it]][randotvet[3]];
+  Form1.CheckBox4.Caption:=masotvet[randzad[it]][randotvet[4]];
+  Form1.CheckBox5.Caption:=masotvet[randzad[it]][randotvet[5]];
+  Form1.Label2.caption:=masvopros[randzad[it]];
+  if (mastypes[randzad[it]]=4) then
+    Form1.Image1.Picture.LoadFromFile('image'+IntToStr(randzad[it])+'.bmp');
+
+  Form1.CheckBox1.show;
+  Form1.CheckBox2.show;
+  Form1.CheckBox3.show;
+  Form1.CheckBox4.show;
+  Form1.CheckBox5.show;
+  Form1.Label2.show;
+  Form1.Image1.show;
+  end;
+
+end;
+procedure TForm1.Button1Click(Sender: TObject);
+var k,t:integer;
+begin
+  it:=1;
   names:=Edit1.Text;
   Button1.Hide;
   Edit1.Hide;
@@ -118,7 +193,8 @@ begin
   readingt2(k);
   end;
   CloseFile(f);
-
+  fill_rand_zad();
+  show_task();
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -136,6 +212,7 @@ SetThreadLocale(1049);
   CheckBox5.Hide;
   Image1.Hide;
   BitBtn1.Hide;
+  bal:=0;
 end;
 
 end.

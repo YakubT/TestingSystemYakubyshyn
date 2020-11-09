@@ -148,6 +148,7 @@ object Form1: TForm1
     0000000000000000000000000000000000000000000000000000000000000000
     000000000000000000000000000000000000000000000000000000000000}
   OldCreateOrder = False
+  Visible = True
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -167,21 +168,21 @@ object Form1: TForm1
   object Label2: TLabel
     Left = 8
     Top = 24
-    Width = 190
-    Height = 32
+    Width = 148
+    Height = 26
     Caption = #1058#1077#1082#1089#1090' '#1087#1080#1090#1072#1085#1085#1103
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -27
+    Font.Height = -23
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Image1: TImage
-    Left = 320
-    Top = 48
-    Width = 177
-    Height = 209
+    Left = 328
+    Top = 56
+    Width = 129
+    Height = 129
     Stretch = True
   end
   object Edit1: TEdit
@@ -215,7 +216,7 @@ object Form1: TForm1
   object RadioButton2: TRadioButton
     Left = 40
     Top = 272
-    Width = 249
+    Width = 737
     Height = 41
     Caption = 'RadioButton1'
     Font.Charset = DEFAULT_CHARSET
@@ -229,7 +230,7 @@ object Form1: TForm1
   object RadioButton3: TRadioButton
     Left = 40
     Top = 336
-    Width = 249
+    Width = 729
     Height = 41
     Caption = 'RadioButton1'
     Font.Charset = DEFAULT_CHARSET
@@ -243,7 +244,7 @@ object Form1: TForm1
   object RadioButton4: TRadioButton
     Left = 40
     Top = 392
-    Width = 249
+    Width = 729
     Height = 41
     Caption = 'RadioButton1'
     Font.Charset = DEFAULT_CHARSET
@@ -257,7 +258,7 @@ object Form1: TForm1
   object RadioButton1: TRadioButton
     Left = 40
     Top = 208
-    Width = 249
+    Width = 729
     Height = 41
     Caption = 'RadioButton1'
     Font.Charset = DEFAULT_CHARSET
@@ -267,11 +268,12 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 5
+    Visible = False
   end
   object CheckBox1: TCheckBox
     Left = 40
     Top = 184
-    Width = 217
+    Width = 729
     Height = 33
     Caption = 'CheckBox1'
     Font.Charset = DEFAULT_CHARSET
@@ -285,7 +287,7 @@ object Form1: TForm1
   object CheckBox2: TCheckBox
     Left = 40
     Top = 248
-    Width = 217
+    Width = 737
     Height = 33
     Caption = 'CheckBox1'
     Font.Charset = DEFAULT_CHARSET
@@ -299,7 +301,7 @@ object Form1: TForm1
   object CheckBox3: TCheckBox
     Left = 40
     Top = 304
-    Width = 217
+    Width = 729
     Height = 33
     Caption = 'CheckBox1'
     Font.Charset = DEFAULT_CHARSET
@@ -313,7 +315,7 @@ object Form1: TForm1
   object CheckBox4: TCheckBox
     Left = 40
     Top = 368
-    Width = 217
+    Width = 737
     Height = 33
     Caption = 'CheckBox1'
     Font.Charset = DEFAULT_CHARSET
@@ -327,7 +329,7 @@ object Form1: TForm1
   object CheckBox5: TCheckBox
     Left = 40
     Top = 432
-    Width = 217
+    Width = 745
     Height = 33
     Caption = 'CheckBox1'
     Font.Charset = DEFAULT_CHARSET
