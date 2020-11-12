@@ -167,16 +167,18 @@ object Form1: TForm1
   end
   object Label2: TLabel
     Left = 8
-    Top = 24
-    Width = 148
-    Height = 26
+    Top = 16
+    Width = 769
+    Height = 81
+    AutoSize = False
     Caption = #1058#1077#1082#1089#1090' '#1087#1080#1090#1072#1085#1085#1103
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -23
+    Font.Height = -32
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
+    WordWrap = True
   end
   object Image1: TImage
     Left = 328
@@ -213,133 +215,6 @@ object Form1: TForm1
     TabOrder = 1
     OnClick = Button1Click
   end
-  object RadioButton2: TRadioButton
-    Left = 40
-    Top = 272
-    Width = 737
-    Height = 41
-    Caption = 'RadioButton1'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -33
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 2
-  end
-  object RadioButton3: TRadioButton
-    Left = 40
-    Top = 336
-    Width = 729
-    Height = 41
-    Caption = 'RadioButton1'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -33
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 3
-  end
-  object RadioButton4: TRadioButton
-    Left = 40
-    Top = 392
-    Width = 729
-    Height = 41
-    Caption = 'RadioButton1'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -33
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 4
-  end
-  object RadioButton1: TRadioButton
-    Left = 40
-    Top = 208
-    Width = 729
-    Height = 41
-    Caption = 'RadioButton1'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -33
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 5
-    Visible = False
-  end
-  object CheckBox1: TCheckBox
-    Left = 40
-    Top = 184
-    Width = 729
-    Height = 33
-    Caption = 'CheckBox1'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -33
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 6
-  end
-  object CheckBox2: TCheckBox
-    Left = 40
-    Top = 248
-    Width = 737
-    Height = 33
-    Caption = 'CheckBox1'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -33
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 7
-  end
-  object CheckBox3: TCheckBox
-    Left = 40
-    Top = 304
-    Width = 729
-    Height = 33
-    Caption = 'CheckBox1'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -33
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 8
-  end
-  object CheckBox4: TCheckBox
-    Left = 40
-    Top = 368
-    Width = 737
-    Height = 33
-    Caption = 'CheckBox1'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -33
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 9
-  end
-  object CheckBox5: TCheckBox
-    Left = 40
-    Top = 432
-    Width = 745
-    Height = 33
-    Caption = 'CheckBox1'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -33
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 10
-  end
   object BitBtn1: TBitBtn
     Left = 584
     Top = 408
@@ -352,7 +227,21 @@ object Form1: TForm1
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
-    TabOrder = 11
+    TabOrder = 2
     Kind = bkOK
+  end
+  object RadioGroup1: TRadioGroup
+    Left = 8
+    Top = 192
+    Width = 569
+    Height = 281
+    Caption = #1042#1072#1088#1110#1072#1085#1090#1080':'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -24
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
   end
 end

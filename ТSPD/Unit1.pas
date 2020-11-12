@@ -12,17 +12,9 @@ type
     Edit1: TEdit;
     Button1: TButton;
     Label2: TLabel;
-    RadioButton2: TRadioButton;
-    RadioButton3: TRadioButton;
-    RadioButton4: TRadioButton;
-    RadioButton1: TRadioButton;
-    CheckBox1: TCheckBox;
-    CheckBox2: TCheckBox;
-    CheckBox3: TCheckBox;
-    CheckBox4: TCheckBox;
-    CheckBox5: TCheckBox;
     Image1: TImage;
     BitBtn1: TBitBtn;
+    RadioGroup1: TRadioGroup;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
@@ -38,10 +30,11 @@ var
   f:text;
   masvopros:array [1..40] of string;
   mastypes: array [1..40] of integer;
-  masotvet: array [1..40,1..6] of string;
-  masprotvet : array [1..40,1..6] of integer;
+  masotvet: array [1..40,1..15] of string;
+  masprotvet : array [1..40,1..15] of integer;
   randzad : array [1..40] of Integer;
-  randotvet : array [1..7] of Integer;
+  randotvet : array [1..15] of Integer;
+  kntvar : array [1..40] of Integer;
 implementation
 
 uses Unit2;
@@ -67,12 +60,15 @@ for i:=1 to length(s) do
 anticezar:=res;
 end;
 procedure readingt1 (nomer:integer);
-var i:integer;s:string;
+var i,kvar:integer;s:string;
 begin
+readln(f,kvar);
+kvar:=kvar-1;
+kntvar[nomer]:=kvar;
 readln(f,s);
 s:=anticezar(s);
 masvopros[nomer]:=s;
-for i:=1 to 4 do
+for i:=1 to kvar do
   begin
   readln(f,s);
   s:=anticezar(s);
@@ -84,11 +80,14 @@ masprotvet[nomer][2]:=i-1;
 end;
 
 procedure readingt2 (nomer:integer);
-var i:integer;s:string;
+var i,kvar:integer;s:string;
 begin
+readln(f,kvar);
+kvar:=kvar-1;
+kntvar[nomer]:=kvar;
 readln(f,s);
 masvopros[nomer]:=anticezar(s);
-for i:=1 to 5 do
+for i:=1 to kvar do
   begin
   readln(f,s);
   masotvet[nomer][i]:=anticezar(s);
@@ -122,53 +121,26 @@ begin
 
   random_shufle(randzad,n);
 end;
-procedure show_task();
+procedure show_task ();
 var i:integer;
 begin
+  Form1.Label2.show;
+  Form1.Label2.Caption:=masvopros[randzad[it]];
+  for i:=1 to kntvar[randzad[it]] do
+  randotvet[i]:=i;
+  random_shufle(randotvet,kntvar[randzad[it]]);
   if (mastypes[randzad[it]]<3) then
   begin
-  for i:=1 to 4 do
-  randotvet[i]:=i;
-  random_shufle(randotvet,4);
-  Form1.RadioButton1.Caption:=masotvet[randzad[it]][randotvet[1]];
-  Form1.RadioButton2.Caption:=masotvet[randzad[it]][randotvet[2]];
-  Form1.RadioButton3.Caption:=masotvet[randzad[it]][randotvet[3]];
-  Form1.RadioButton4.Caption:=masotvet[randzad[it]][randotvet[4]];
-  Form1.Label2.caption:=masvopros[randzad[it]];
-  if (mastypes[randzad[it]]=2) then
-    Form1.Image1.Picture.LoadFromFile('image'+IntToStr(randzad[it])+'.bmp');
-
-  Form1.RadioButton1.show;
-  Form1.RadioButton2.show;
-  Form1.RadioButton3.show;
-  Form1.RadioButton4.show;
-  Form1.Label2.show;
-  Form1.Image1.show;
+    for i:=1 to kntvar[randzad[it]] do
+    Form1.RadioGroup1.Items.add(masotvet[randzad[it]][randotvet[i]]);
+    Form1.RadioGroup1.Show;
   end;
-
-   if (mastypes[randzad[it]]>2) then
+  if ((mastypes[randzad[it]]=2) or (mastypes[randzad[it]]=4)) then
   begin
-  for i:=1 to 5 do
-  randotvet[i]:=i;
-  random_shufle(randotvet,5);
-  Form1.CheckBox1.Caption:=masotvet[randzad[it]][randotvet[1]];
-  Form1.CheckBox2.Caption:=masotvet[randzad[it]][randotvet[2]];
-  Form1.CheckBox3.Caption:=masotvet[randzad[it]][randotvet[3]];
-  Form1.CheckBox4.Caption:=masotvet[randzad[it]][randotvet[4]];
-  Form1.CheckBox5.Caption:=masotvet[randzad[it]][randotvet[5]];
-  Form1.Label2.caption:=masvopros[randzad[it]];
-  if (mastypes[randzad[it]]=4) then
     Form1.Image1.Picture.LoadFromFile('image'+IntToStr(randzad[it])+'.bmp');
-
-  Form1.CheckBox1.show;
-  Form1.CheckBox2.show;
-  Form1.CheckBox3.show;
-  Form1.CheckBox4.show;
-  Form1.CheckBox5.show;
-  Form1.Label2.show;
-  Form1.Image1.show;
+    Form1.Image1.show;
   end;
-
+    it:=it+1;
 end;
 procedure TForm1.Button1Click(Sender: TObject);
 var k,t:integer;
@@ -201,17 +173,9 @@ procedure TForm1.FormCreate(Sender: TObject);
 begin
 SetThreadLocale(1049);
   Label2.Hide;
-  RadioButton1.Hide;
-  RadioButton2.Hide;
-  RadioButton3.Hide;
-  RadioButton4.Hide;
-  CheckBox1.Hide;
-  CheckBox2.Hide;
-  CheckBox3.Hide;
-  CheckBox4.Hide;
-  CheckBox5.Hide;
   Image1.Hide;
   BitBtn1.Hide;
+  RadioGroup1.Hide;
   bal:=0;
 end;
 
