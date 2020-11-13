@@ -228,6 +228,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 2
+    OnClick = BitBtn1Click
     Kind = bkOK
   end
   object RadioGroup1: TRadioGroup
@@ -243,5 +244,169 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 3
+  end
+  object GroupBox1: TGroupBox
+    Left = 8
+    Top = 192
+    Width = 569
+    Height = 281
+    Caption = #1042#1072#1088#1110#1072#1085#1090#1080':'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -24
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 4
+    object CheckBox1: TCheckBox
+      Left = 8
+      Top = 40
+      Width = 529
+      Height = 41
+      Caption = 'CheckBox1'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      WordWrap = True
+    end
+    object CheckBox2: TCheckBox
+      Left = 8
+      Top = 80
+      Width = 521
+      Height = 41
+      Caption = 'CheckBox1'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      WordWrap = True
+    end
+    object CheckBox3: TCheckBox
+      Left = 8
+      Top = 128
+      Width = 521
+      Height = 33
+      Caption = 'CheckBox1'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      WordWrap = True
+    end
+    object CheckBox4: TCheckBox
+      Left = 8
+      Top = 168
+      Width = 529
+      Height = 41
+      Caption = 'CheckBox1'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      WordWrap = True
+    end
+    object CheckBox5: TCheckBox
+      Left = 8
+      Top = 208
+      Width = 537
+      Height = 57
+      Caption = 'CheckBox1'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+      WordWrap = True
+    end
+    object CheckBox6: TCheckBox
+      Left = 272
+      Top = 40
+      Width = 281
+      Height = 49
+      Caption = 'CheckBox1'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 5
+      WordWrap = True
+    end
+    object CheckBox7: TCheckBox
+      Left = 272
+      Top = 88
+      Width = 289
+      Height = 33
+      Caption = 'CheckBox1'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 6
+      WordWrap = True
+    end
+    object CheckBox8: TCheckBox
+      Left = 272
+      Top = 128
+      Width = 281
+      Height = 41
+      Caption = 'CheckBox1'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 7
+      WordWrap = True
+    end
+    object CheckBox9: TCheckBox
+      Left = 272
+      Top = 168
+      Width = 281
+      Height = 41
+      Caption = 'CheckBox1'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 8
+      WordWrap = True
+    end
+    object CheckBox10: TCheckBox
+      Left = 272
+      Top = 216
+      Width = 273
+      Height = 41
+      Caption = 'CheckBox1'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 9
+      WordWrap = True
+    end
   end
 end

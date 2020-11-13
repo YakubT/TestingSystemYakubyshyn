@@ -15,8 +15,20 @@ type
     Image1: TImage;
     BitBtn1: TBitBtn;
     RadioGroup1: TRadioGroup;
+    GroupBox1: TGroupBox;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
+    CheckBox5: TCheckBox;
+    CheckBox6: TCheckBox;
+    CheckBox7: TCheckBox;
+    CheckBox8: TCheckBox;
+    CheckBox9: TCheckBox;
+    CheckBox10: TCheckBox;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -124,6 +136,8 @@ end;
 procedure show_task ();
 var i:integer;
 begin
+  Form1.RadioGroup1.Items.Clear;
+  Form1.BitBtn1.Show;
   Form1.Label2.show;
   Form1.Label2.Caption:=masvopros[randzad[it]];
   for i:=1 to kntvar[randzad[it]] do
@@ -134,6 +148,25 @@ begin
     for i:=1 to kntvar[randzad[it]] do
     Form1.RadioGroup1.Items.add(masotvet[randzad[it]][randotvet[i]]);
     Form1.RadioGroup1.Show;
+  end
+  else
+  begin
+    Form1.GroupBox1.Show;
+    Form1.CheckBox1.Hide;
+    Form1.CheckBox2.Hide;
+    Form1.CheckBox3.Hide;
+    Form1.CheckBox4.Hide;
+    Form1.CheckBox5.Hide;
+    Form1.CheckBox6.Hide;
+    Form1.CheckBox7.Hide;
+    Form1.CheckBox8.Hide;
+    Form1.CheckBox9.Hide;
+    Form1.CheckBox10.Hide;
+    for i:=1 to kntvar[randzad[it]] do
+    begin
+    (Form1.FindComponent('CheckBox' + IntToStr(i)) AS TCheckBox).caption:=masotvet[randzad[it]][randotvet[i]];
+    (Form1.FindComponent('CheckBox' + IntToStr(i)) AS TCheckBox).Show;
+    end;
   end;
   if ((mastypes[randzad[it]]=2) or (mastypes[randzad[it]]=4)) then
   begin
@@ -168,7 +201,17 @@ begin
   fill_rand_zad();
   show_task();
 end;
-
+procedure hide_all ();
+begin
+Form1.BitBtn1.Hide;
+Form1.Button1.Hide;
+Form1.Edit1.Hide;
+Form1.GroupBox1.Hide;
+Form1.Image1.Hide;
+Form1.Label1.Hide;
+Form1.Label2.Hide;
+Form1.RadioGroup1.Hide;
+end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
 SetThreadLocale(1049);
@@ -176,7 +219,16 @@ SetThreadLocale(1049);
   Image1.Hide;
   BitBtn1.Hide;
   RadioGroup1.Hide;
+  GroupBox1.Hide;
   bal:=0;
+end;
+
+procedure TForm1.BitBtn1Click(Sender: TObject);
+var i:Integer;
+begin
+hide_all();
+Label1.Show;
+label1.Caption:='Відповідь зарахована';
 end;
 
 end.
