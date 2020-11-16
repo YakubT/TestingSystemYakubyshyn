@@ -26,6 +26,7 @@ type
     CheckBox8: TCheckBox;
     CheckBox9: TCheckBox;
     CheckBox10: TCheckBox;
+    Label3: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -92,7 +93,7 @@ masprotvet[nomer][2]:=i-1;
 end;
 
 procedure readingt2 (nomer:integer);
-var i,kvar:integer;s:string;
+var i,kvar,len:integer;s:string;
 begin
 readln(f,kvar);
 kvar:=kvar-1;
@@ -104,11 +105,16 @@ for i:=1 to kvar do
   readln(f,s);
   masotvet[nomer][i]:=anticezar(s);
   end;
-readln (f,s);
-masprotvet[nomer][1]:=(Length(s) div 2)+1;
-for i:=1 to length(s) do
-if (s[i] <> ' ') then
-masprotvet[nomer][(i div 2) + 2]:=ord(s[i])-49;
+read(f,len);
+len:=len-1;
+masprotvet[nomer][1]:=len;
+for i:=2 to (len) do
+  begin
+  read(f,masprotvet[nomer][i]);
+  masprotvet[nomer][i]:=masprotvet[nomer][i]-1;
+  end;
+readln(f,masprotvet[nomer][len+1]);
+masprotvet[nomer][len+1]:=masprotvet[nomer][len+1]-1;
 end;
 procedure random_shufle (var mas:array of Integer;len :integer);
 var i,a,b,c:Integer;
@@ -136,6 +142,8 @@ end;
 procedure show_task ();
 var i:integer;
 begin
+  Form1.Label3.show;
+  Form1.Label3.Caption:=IntToStr(it)+'/'+IntTostr(n);
   Form1.RadioGroup1.Items.Clear;
   Form1.BitBtn1.Show;
   Form1.Label2.show;
@@ -145,6 +153,7 @@ begin
   random_shufle(randotvet,kntvar[randzad[it]]);
   if (mastypes[randzad[it]]<3) then
   begin
+    Form1.RadioGroup1.ItemIndex:=-1;
     for i:=1 to kntvar[randzad[it]] do
     Form1.RadioGroup1.Items.add(masotvet[randzad[it]][randotvet[i]]);
     Form1.RadioGroup1.Show;
@@ -165,6 +174,7 @@ begin
     for i:=1 to kntvar[randzad[it]] do
     begin
     (Form1.FindComponent('CheckBox' + IntToStr(i)) AS TCheckBox).caption:=masotvet[randzad[it]][randotvet[i]];
+    (Form1.FindComponent('CheckBox' + IntToStr(i)) AS TCheckBox).Checked:=false;
     (Form1.FindComponent('CheckBox' + IntToStr(i)) AS TCheckBox).Show;
     end;
   end;
@@ -173,7 +183,60 @@ begin
     Form1.Image1.Picture.LoadFromFile('image'+IntToStr(randzad[it])+'.bmp');
     Form1.Image1.show;
   end;
-    it:=it+1;
+end;
+procedure swap (var a,b:integer);
+var c:integer;
+begin
+c:=b;
+b:=a;
+a:=c;
+end;
+procedure sort(var mas:array of integer;l,r:integer);
+var i,j:integer;
+begin
+  for i:=1 to (r-l+1) do
+  for j:=l to r-1 do
+    if (mas[j]>mas[j+1]) then
+      swap(mas[j],mas[j+1]);
+end;
+function comp_mas(mas1,mas2:array of integer):boolean;
+var i:integer;flag:boolean;
+begin
+  if (mas1[1]<>mas2[1]) then
+  comp_mas:=false
+  else
+  begin
+  flag:=true;
+  for i:=2 to (mas1[1]+1) do
+    if (mas1[i]<>mas2[i]) then
+      flag:=false;
+  comp_mas:=flag;
+  end;
+end;
+procedure check ();
+var mas_check : array [1..100] of integer;i:integer;
+begin
+  if (mastypes[randzad[it]]<3) then
+    if (masprotvet[randzad[it]][2]=randotvet[Form1.RadioGroup1.ItemIndex+1]) then
+      bal:=bal+1;
+  if (mastypes[randzad[it]]>2) then
+  begin
+  sort(masprotvet[randzad[it]],2,masprotvet[randzad[it]][1]+1);
+  mas_check[1]:=0;
+  for i:=1 to kntvar[randzad[it]] do
+    begin
+
+    if ((Form1.FindComponent('CheckBox' + IntToStr(i)) AS TCheckBox).Checked=true) then
+      begin
+      mas_check[1]:=mas_check[1]+1;
+      mas_check[mas_check[1]+1]:=randotvet[i];
+      end;
+    end;
+  sort(mas_check,2,mas_check[1]+1);
+  if (comp_mas(mas_check,masprotvet[randzad[it]])=true) then
+  bal:=bal+1;
+  end;
+
 end;
 procedure TForm1.Button1Click(Sender: TObject);
 var k,t:integer;
@@ -203,6 +266,7 @@ begin
 end;
 procedure hide_all ();
 begin
+Form1.Label3.Hide;
 Form1.BitBtn1.Hide;
 Form1.Button1.Hide;
 Form1.Edit1.Hide;
@@ -212,9 +276,22 @@ Form1.Label1.Hide;
 Form1.Label2.Hide;
 Form1.RadioGroup1.Hide;
 end;
+procedure Delay (dwMilliseconds: Longint);
+var
+iStart, iStop: DWORD;
+begin
+iStart := GetTickCount;
+repeat
+iStop := GetTickCount;
+Sleep(1);
+Application.ProcessMessages;
+until (iStop - iStart) >= dwMilliseconds;
+end;
+
 procedure TForm1.FormCreate(Sender: TObject);
 begin
 SetThreadLocale(1049);
+  Form1.Label3.Hide;
   Label2.Hide;
   Image1.Hide;
   BitBtn1.Hide;
@@ -224,11 +301,19 @@ SetThreadLocale(1049);
 end;
 
 procedure TForm1.BitBtn1Click(Sender: TObject);
-var i:Integer;
 begin
 hide_all();
-Label1.Show;
+check();
+Label3.Show;
+Label3.Caption:=IntTostr(bal);
 label1.Caption:='Відповідь зарахована';
+Label1.Show;
+Delay(1400);
+Label1.Hide;
+it:=it+1;
+
+if (it<=n) then
+show_task();
 end;
 
 end.

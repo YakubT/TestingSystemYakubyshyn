@@ -5,7 +5,7 @@ object Form1: TForm1
   BorderStyle = bsSingle
   Caption = 'Ts'
   ClientHeight = 498
-  ClientWidth = 807
+  ClientWidth = 814
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -168,7 +168,7 @@ object Form1: TForm1
   object Label2: TLabel
     Left = 8
     Top = 16
-    Width = 769
+    Width = 721
     Height = 81
     AutoSize = False
     Caption = #1058#1077#1082#1089#1090' '#1087#1080#1090#1072#1085#1085#1103
@@ -186,6 +186,19 @@ object Form1: TForm1
     Width = 129
     Height = 129
     Stretch = True
+  end
+  object Label3: TLabel
+    Left = 736
+    Top = 8
+    Width = 63
+    Height = 25
+    Caption = 'caption'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
   end
   object Edit1: TEdit
     Left = 168
