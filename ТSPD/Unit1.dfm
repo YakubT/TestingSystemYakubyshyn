@@ -154,9 +154,10 @@ object Form1: TForm1
   TextHeight = 13
   object Label1: TLabel
     Left = 176
-    Top = 112
-    Width = 457
-    Height = 46
+    Top = 104
+    Width = 769
+    Height = 105
+    AutoSize = False
     Caption = #1042#1074#1077#1076#1110#1090#1100' '#1087#1088#1110#1079#1074#1080#1097#1077' '#1090#1072' '#1110#1084#39#1103
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -164,10 +165,11 @@ object Form1: TForm1
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
+    WordWrap = True
   end
   object Label2: TLabel
     Left = 8
-    Top = 16
+    Top = 8
     Width = 721
     Height = 81
     AutoSize = False
@@ -199,6 +201,13 @@ object Form1: TForm1
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
+  end
+  object Label4: TLabel
+    Left = 40
+    Top = 256
+    Width = 32
+    Height = 13
+    Caption = 'Label4'
   end
   object Edit1: TEdit
     Left = 168

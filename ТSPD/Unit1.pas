@@ -27,6 +27,7 @@ type
     CheckBox9: TCheckBox;
     CheckBox10: TCheckBox;
     Label3: TLabel;
+    Label4: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -53,6 +54,23 @@ implementation
 uses Unit2;
 
 {$R *.dfm}
+procedure swap (var a,b:integer);
+var c:integer;
+begin
+c:=b;
+b:=a;
+a:=c;
+end;
+
+procedure sort(var mas:array of integer;l,r:integer);
+var i,j:integer;
+begin
+  for i:=1 to (r-l+1) do
+  for j:=l to r-1 do
+    if (mas[j]>mas[j+1]) then
+      swap(mas[j],mas[j+1]);
+
+end;
 
 function anticezar (s:String):String;
 var res:String;i,k:integer;
@@ -184,30 +202,17 @@ begin
     Form1.Image1.show;
   end;
 end;
-procedure swap (var a,b:integer);
-var c:integer;
-begin
-c:=b;
-b:=a;
-a:=c;
-end;
-procedure sort(var mas:array of integer;l,r:integer);
-var i,j:integer;
-begin
-  for i:=1 to (r-l+1) do
-  for j:=l to r-1 do
-    if (mas[j]>mas[j+1]) then
-      swap(mas[j],mas[j+1]);
-end;
+
 function comp_mas(mas1,mas2:array of integer):boolean;
 var i:integer;flag:boolean;
 begin
-  if (mas1[1]<>mas2[1]) then
+
+  if (mas1[0]<>mas2[0]) then
   comp_mas:=false
   else
   begin
   flag:=true;
-  for i:=2 to (mas1[1]+1) do
+  for i:=1 to (mas1[0]) do
     if (mas1[i]<>mas2[i]) then
       flag:=false;
   comp_mas:=flag;
@@ -221,8 +226,8 @@ begin
       bal:=bal+1;
   if (mastypes[randzad[it]]>2) then
   begin
-  sort(masprotvet[randzad[it]],2,masprotvet[randzad[it]][1]+1);
   mas_check[1]:=0;
+  sort(masprotvet[randzad[it]],1,masprotvet[randzad[it]][1]);
   for i:=1 to kntvar[randzad[it]] do
     begin
 
@@ -232,7 +237,7 @@ begin
       mas_check[mas_check[1]+1]:=randotvet[i];
       end;
     end;
-  sort(mas_check,2,mas_check[1]+1);
+  sort(mas_check,1,mas_check[1]);
   if (comp_mas(mas_check,masprotvet[randzad[it]])=true) then
   bal:=bal+1;
   end;
@@ -293,19 +298,31 @@ begin
 SetThreadLocale(1049);
   Form1.Label3.Hide;
   Label2.Hide;
+  Label4.Hide;
   Image1.Hide;
   BitBtn1.Hide;
   RadioGroup1.Hide;
   GroupBox1.Hide;
   bal:=0;
 end;
-
+procedure show_res ();
+var res:extended;
+begin
+res:=trunc((bal/n*12)+0.50001);
+hide_all();
+Form1.Label1.Show;
+Form1.Label1.Left:=16;
+Form1.Label1.Caption:=names+' отримав(ла) '+FloattoStr(res)+' балів';
+Form1.Label4.Left:=16;
+Form1.Label4.Top:=200;
+Form1.Label4.Show;
+Form1.Label4.Font.Size:=25;
+Form1.Label4.Caption:='Правильних відповідей '+Inttostr(bal)+' з '+Inttostr(n);
+end;
 procedure TForm1.BitBtn1Click(Sender: TObject);
 begin
 hide_all();
 check();
-Label3.Show;
-Label3.Caption:=IntTostr(bal);
 label1.Caption:='Відповідь зарахована';
 Label1.Show;
 Delay(1400);
@@ -313,7 +330,9 @@ Label1.Hide;
 it:=it+1;
 
 if (it<=n) then
-show_task();
+show_task()
+else
+show_res();
 end;
 
 end.
