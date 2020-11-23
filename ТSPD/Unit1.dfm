@@ -1,10 +1,10 @@
 object Form1: TForm1
-  Left = 263
-  Top = 140
+  Left = 294
+  Top = 314
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Ts'
-  ClientHeight = 498
+  ClientHeight = 478
   ClientWidth = 814
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -147,6 +147,7 @@ object Form1: TForm1
     0000000000000000000000000000000000000000000000000000000000000000
     0000000000000000000000000000000000000000000000000000000000000000
     000000000000000000000000000000000000000000000000000000000000}
+  Menu = MainMenu1
   OldCreateOrder = False
   Visible = True
   OnCreate = FormCreate
@@ -430,5 +431,48 @@ object Form1: TForm1
       TabOrder = 9
       WordWrap = True
     end
+  end
+  object Button2: TButton
+    Left = 584
+    Top = 352
+    Width = 209
+    Height = 41
+    Caption = #1053#1072#1079#1072#1076
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -24
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 5
+    OnClick = Button2Click
+  end
+  object MainMenu1: TMainMenu
+    Left = 720
+    Top = 128
+    object File1: TMenuItem
+      Caption = #1047#1072#1074#1072#1085#1090#1072#1078#1080#1090#1080' '#1090#1077#1089#1090
+      OnClick = File1Click
+    end
+    object Cr1: TMenuItem
+      Caption = #1056#1077#1078#1080#1084
+      object N1: TMenuItem
+        Caption = #1047' '#1087#1088#1080#1093#1086#1074#1072#1085#1080#1084' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1086#1084
+        OnClick = N1Click
+      end
+      object N2: TMenuItem
+        Caption = #1047' '#1074#1110#1076#1082#1088#1080#1090#1080#1084' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1086#1084
+        OnClick = N2Click
+      end
+      object N3: TMenuItem
+        Caption = #1047' '#1084#1086#1078#1083#1080#1074#1086#1089#1090#1110' '#1087#1086#1074#1077#1088#1085#1077#1085#1085#1103
+        OnClick = N3Click
+      end
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    Filter = '*.txt'
+    Left = 680
+    Top = 264
   end
 end

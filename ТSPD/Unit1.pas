@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, Buttons;
+  Dialogs, StdCtrls, ExtCtrls, Buttons, Menus;
 
 type
   TForm1 = class(TForm)
@@ -28,9 +28,22 @@ type
     CheckBox10: TCheckBox;
     Label3: TLabel;
     Label4: TLabel;
+    MainMenu1: TMainMenu;
+    File1: TMenuItem;
+    Cr1: TMenuItem;
+    OpenDialog1: TOpenDialog;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    Button2: TButton;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
+    procedure N1Click(Sender: TObject);
+    procedure File1Click(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure N3Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,6 +55,7 @@ var
   names:string;
   bal,n,it:integer;
   f:text;
+  rezhym:Integer;
   masvopros:array [1..40] of string;
   mastypes: array [1..40] of integer;
   masotvet: array [1..40,1..15] of string;
@@ -49,6 +63,7 @@ var
   randzad : array [1..40] of Integer;
   randotvet : array [1..15] of Integer;
   kntvar : array [1..40] of Integer;
+  markmas: array [1..40] of Boolean;
 implementation
 
 uses Unit2;
@@ -160,6 +175,11 @@ end;
 procedure show_task ();
 var i:integer;
 begin
+  if ((rezhym=3) and (it>1)) then
+  Form1.Button2.Show
+  else
+  Form1.Button2.Hide;
+  
   Form1.Label3.show;
   Form1.Label3.Caption:=IntToStr(it)+'/'+IntTostr(n);
   Form1.RadioGroup1.Items.Clear;
@@ -223,7 +243,9 @@ var mas_check : array [1..100] of integer;i:integer;
 begin
   if (mastypes[randzad[it]]<3) then
     if (masprotvet[randzad[it]][2]=randotvet[Form1.RadioGroup1.ItemIndex+1]) then
-      bal:=bal+1;
+      markmas[it]:=True
+    else
+    markmas[it]:=False;
   if (mastypes[randzad[it]]>2) then
   begin
   mas_check[1]:=0;
@@ -239,19 +261,24 @@ begin
     end;
   sort(mas_check,1,mas_check[1]);
   if (comp_mas(mas_check,masprotvet[randzad[it]])=true) then
-  bal:=bal+1;
+    markmas[it]:=True
+  else
+  markmas[it]:=False;
   end;
 
 end;
 procedure TForm1.Button1Click(Sender: TObject);
 var k,t:integer;
 begin
+  if (OpenDialog1.FileName<>'') then
+  begin
+  MainMenu1.Destroy;
   it:=1;
   names:=Edit1.Text;
   Button1.Hide;
   Edit1.Hide;
   Label1.Hide;
-  AssignFile(f, 'ask and ans.txt');
+  AssignFile(f, OpenDialog1.FileName);
   reset(f);
   readln(f,n);
   n:=n-1;
@@ -268,9 +295,16 @@ begin
   CloseFile(f);
   fill_rand_zad();
   show_task();
+  end
+  else
+  with Application do
+   begin
+      MessageBox('Для початку завантажте тест','Повідомлення', MB_OK);
+   end;
 end;
 procedure hide_all ();
 begin
+Form1.Button2.Hide;
 Form1.Label3.Hide;
 Form1.BitBtn1.Hide;
 Form1.Button1.Hide;
@@ -295,6 +329,7 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
+  rezhym:=1;
 SetThreadLocale(1049);
   Form1.Label3.Hide;
   Label2.Hide;
@@ -303,11 +338,15 @@ SetThreadLocale(1049);
   BitBtn1.Hide;
   RadioGroup1.Hide;
   GroupBox1.Hide;
+  Button2.Hide;
   bal:=0;
 end;
 procedure show_res ();
-var res:extended;
+var res:extended;i:Integer;
 begin
+for i:=1 to n do
+  if (markmas[i]=True)  then
+  bal:=bal+1;
 res:=trunc((bal/n*12)+0.50001);
 hide_all();
 Form1.Label1.Show;
@@ -323,16 +362,75 @@ procedure TForm1.BitBtn1Click(Sender: TObject);
 begin
 hide_all();
 check();
+If (rezhym=1) then
+begin
 label1.Caption:='Відповідь зарахована';
 Label1.Show;
 Delay(1400);
 Label1.Hide;
+end;
+If (rezhym=2) then
+begin
+If (markmas[it]=True) then
+label1.Caption:='Правильна відповіді'
+else
+label1.Caption:='Неправильна відповіді';
+Label1.Show;
+Delay(1400);
+Label1.Hide;
+end;
 it:=it+1;
 
 if (it<=n) then
 show_task()
 else
 show_res();
+end;
+
+
+
+procedure TForm1.N1Click(Sender: TObject);
+begin
+rezhym:=1;
+with Application do
+   begin
+      MessageBox('Режим вибрано','Повідомлення', MB_OK);
+   end;
+
+end;
+
+procedure TForm1.File1Click(Sender: TObject);
+begin
+OpenDialog1.Execute;
+end;
+
+procedure TForm1.N2Click(Sender: TObject);
+begin
+  rezhym:=2;
+ with Application do
+   begin
+      MessageBox('Режим вибрано','Повідомлення', MB_OK);
+   end;
+end;
+
+procedure TForm1.N3Click(Sender: TObject);
+begin
+  rezhym:=3;
+with Application do
+   begin
+      MessageBox('Режим вибрано','Повідомлення', MB_OK);
+   end;
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+  if (it<>1) then
+  begin
+it:=it-1;
+Image1.Hide;
+show_task();
+
+end;
 end;
 
 end.
