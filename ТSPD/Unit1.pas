@@ -64,6 +64,7 @@ var
   randotvet : array [1..15] of Integer;
   kntvar : array [1..40] of Integer;
   markmas: array [1..40] of Boolean;
+  savechecking: array [1..40,1..15] of integer;
 implementation
 
 uses Unit2;
@@ -175,10 +176,17 @@ end;
 procedure show_task ();
 var i:integer;
 begin
-  if ((rezhym=3) and (it>1)) then
+  if (rezhym=3) then
+  begin
+  if (it>1) then
   Form1.Button2.Show
   else
   Form1.Button2.Hide;
+  if (it<>n) then
+  Form1.BitBtn1.Caption:='Далі'
+  else
+    Form1.BitBtn1.Caption:='Завершити тест'
+  end;
   
   Form1.Label3.show;
   Form1.Label3.Caption:=IntToStr(it)+'/'+IntTostr(n);
@@ -188,6 +196,7 @@ begin
   Form1.Label2.Caption:=masvopros[randzad[it]];
   for i:=1 to kntvar[randzad[it]] do
   randotvet[i]:=i;
+  if (rezhym<>3) then
   random_shufle(randotvet,kntvar[randzad[it]]);
   if (mastypes[randzad[it]]<3) then
   begin
@@ -216,13 +225,30 @@ begin
     (Form1.FindComponent('CheckBox' + IntToStr(i)) AS TCheckBox).Show;
     end;
   end;
+  if (rezhym=3) then
+  if (savechecking[it][1]<>(-1)) then
+    begin
+    if (mastypes[randzad[it]]>2) then
+      begin
+      for i:=2 to (savechecking[it][1]+1) do
+        (Form1.FindComponent('CheckBox' + IntToStr(savechecking[it][i])) AS TCheckBox).Checked:=true;
+      end
+    else
+      Form1.RadioGroup1.ItemIndex:=savechecking[it][1];
+    end;
+
   if ((mastypes[randzad[it]]=2) or (mastypes[randzad[it]]=4)) then
   begin
     Form1.Image1.Picture.LoadFromFile('image'+IntToStr(randzad[it])+'.bmp');
     Form1.Image1.show;
   end;
+     end;
+procedure fillsv();
+var i:integer;
+begin
+for i:=1 to n do
+savechecking[i][1]:=-1;
 end;
-
 function comp_mas(mas1,mas2:array of integer):boolean;
 var i:integer;flag:boolean;
 begin
@@ -270,6 +296,7 @@ end;
 procedure TForm1.Button1Click(Sender: TObject);
 var k,t:integer;
 begin
+
   if (OpenDialog1.FileName<>'') then
   begin
   MainMenu1.Destroy;
@@ -294,6 +321,7 @@ begin
   end;
   CloseFile(f);
   fill_rand_zad();
+  fillsv();
   show_task();
   end
   else
@@ -301,6 +329,7 @@ begin
    begin
       MessageBox('Для початку завантажте тест','Повідомлення', MB_OK);
    end;
+
 end;
 procedure hide_all ();
 begin
@@ -340,6 +369,7 @@ SetThreadLocale(1049);
   GroupBox1.Hide;
   Button2.Hide;
   bal:=0;
+
 end;
 procedure show_res ();
 var res:extended;i:Integer;
@@ -358,8 +388,28 @@ Form1.Label4.Show;
 Form1.Label4.Font.Size:=25;
 Form1.Label4.Caption:='Правильних відповідей '+Inttostr(bal)+' з '+Inttostr(n);
 end;
+
+procedure svchek ();
+var i:integer;
+begin
+savechecking[it][1]:=0;
+if (mastypes[randzad[it]]<3) then
+  savechecking[it][1]:=Form1.RadioGroup1.ItemIndex
+else
+begin
+   for i:=1 to kntvar[randzad[it]] do
+    begin
+    if ((Form1.FindComponent('CheckBox' + IntToStr(i)) AS TCheckBox).Checked=true) then
+      begin
+      savechecking[it][1]:=savechecking[it][1]+1;
+      savechecking[it][savechecking[it][1]+1]:=i;
+      end;
+    end;
+end;
+end;
 procedure TForm1.BitBtn1Click(Sender: TObject);
 begin
+svchek();
 hide_all();
 check();
 If (rezhym=1) then
@@ -372,9 +422,9 @@ end;
 If (rezhym=2) then
 begin
 If (markmas[it]=True) then
-label1.Caption:='Правильна відповіді'
+label1.Caption:='Правильна відповідь'
 else
-label1.Caption:='Неправильна відповіді';
+label1.Caption:='Неправильна відповідь';
 Label1.Show;
 Delay(1400);
 Label1.Hide;
@@ -424,12 +474,13 @@ end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
+svchek();
+hide_all();
   if (it<>1) then
   begin
 it:=it-1;
 Image1.Hide;
 show_task();
-
 end;
 end;
 
