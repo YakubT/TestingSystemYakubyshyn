@@ -54,7 +54,7 @@ var
   Form1: TForm1;
   names:string;
   bal,n,it:integer;
-  f:text;
+  f,g:text;
   rezhym:Integer;
   masvopros:array [1..40] of string;
   mastypes: array [1..40] of integer;
@@ -291,6 +291,28 @@ begin
   else
   markmas[it]:=False;
   end;
+
+end;
+
+procedure saveres ();
+var s:string;
+begin
+s:=Form1.OpenDialog1.Name;
+Delete(s,Length(s)-3,4);
+if (FileExists(s+' res.txt')) then
+  begin
+    AssignFile(g,s+' res.txt');
+    Append(g);
+    Writeln(g,names);
+    writeln(g,bal);
+  end
+else
+begin
+AssignFile(g,s+' res.txt');
+    Rewrite(g);
+    Writeln(g,names);
+    writeln(g,bal);
+end;
 
 end;
 procedure TForm1.Button1Click(Sender: TObject);
